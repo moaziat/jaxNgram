@@ -132,7 +132,7 @@ def train(params: Tuple, X: jnp.array, Y:jnp.array, max_steps: int, batch_size: 
 
     scheduler = optax.piecewise_constant_schedule(
         init_value = 0.005, 
-        boundaries_and_scales={100000: 0.1}
+        boundaries_and_scales={100000: 0.008}
     )
     optimizer = optax.chain(
         optax.clip(1.0),
@@ -216,8 +216,8 @@ if __name__ == "__main__":
  
     random.seed(42)
     random.shuffle(df)
-    n1 = int(0.2*len(df))
-    n2 = int(0.2*len(df))
+    n1 = int(0.8*len(df))
+    n2 = int(0.8*len(df))
 
     Xtr,  Ytr,_, _  = build_dataset(df[:n1])     # 80%
     Xdev, Ydev,_ , _= build_dataset(df[n1:n2])   # 10%
