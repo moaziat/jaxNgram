@@ -168,42 +168,48 @@ def train(params: Tuple, X: jnp.array, Y:jnp.array, max_steps: int, batch_size: 
     return params
   
 
-def sample_from_model(params, itos, block_size=3, num_samples=20, temperature=1.0):
+def sample_from_model(params, itos, block_size=3, num_samples=20):
     key = jax.random.PRNGKey(2147483647 + 10)
     
+    C, W1, b1, W2, b2, W3, b3, W4, b4, W5, b5, W6, b6 = params
+
     for _ in range(num_samples):
         out = []
-        context = [0] * block_size  # initialize with padding
+        context = [0] * block_size # initialize with padding
         
         while True:
-            # Convert context to array
-            context_array = jnp.array([context])
+            # Get embeddings
+            emb = linear_layer(C, jnp.array([context])) # (1,block_size,d)
             
-            # Forward pass
-            logits = forward(params, context_array)
+            # Forward pass through first layer
+            h = emb.reshape(1, -1) @ W1 + b1
+            h = tanh(h)
             
-            # Apply temperature
-            logits = logits / temperature
+            # Forward through remaining layers
+            h = hidden_layer(h, W2, b2)
+            h = hidden_layer(h, W3, b3)
+            h = hidden_layer(h, W4, b4)
+            h = hidden_layer(h, W5, b5)
             
-            # Convert to probabilities
+            # Output layer
+            logits = h @ W6 + b6
+            
+            # Get probabilities
             probs = jax.nn.softmax(logits[0])
             
-            # Sample from the distribution
+            # Sample from distribution
             key, subkey = jax.random.split(key)
-            ix = jax.random.categorical(subkey, probs[0])
-            ix = int(ix)  # convert to Python int for list operations
+            ix = jax.random.categorical(subkey, probs)
+            ix = int(ix)
             
-            # Update context and store output
+            # Update context
             context = context[1:] + [ix]
             out.append(ix)
             
-            # Break if we sample the special '.' token
             if ix == 0:
                 break
         
-        # Decode and print the generated word
-        word = ''.join(itos[i] for i in out)
-        print(word)
+        print(''.join(itos[i] for i in out))
 
 
 
