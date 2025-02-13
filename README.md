@@ -15,7 +15,8 @@ Example training progress and generated names:
     199000/ 200000: 2.4073
 
  Generating sample names: 
- '''
+
+    $ 
     en.
     eta.
     aemoovqhgyynodpipzzp.
@@ -35,8 +36,7 @@ Example training progress and generated names:
     jfbsqmupq.
     vxk.
     hxopggfwmytzf.
-
-''' 
+    ```
 
 ## Overview
 This code implements a character-level name generator using a Multi-Layer Perceptron (MLP) neural network. It learns patterns from a dataset of names and can generate new, similar-sounding names.
