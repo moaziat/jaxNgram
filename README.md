@@ -2,8 +2,9 @@
 
 A simple character-level name generator using a Multi-Layer Perceptron implemented in JAX.
 
+This project is leading to a larger project for the next days. 
 
-## Output example
+ ## Output example
 
 Example training progress and generated names:      
 
