@@ -176,7 +176,8 @@ def sample_from_model(params, itos, block_size=3, num_samples=20):
         out = []
         context = [0] * block_size # initialize with padding
         
-        while True:
+
+        for _ in range(20):
             # Get embeddings
             emb = linear_layer(C, jnp.array([context])) # (1,block_size,d)
             
@@ -205,11 +206,11 @@ def sample_from_model(params, itos, block_size=3, num_samples=20):
             context = context[1:] + [ix]
             out.append(ix)
             
+            # Break if end token or max length reached
             if ix == 0:
                 break
         
         print(''.join(itos[i] for i in out))
-
 
 
 if __name__ == "__main__": 
