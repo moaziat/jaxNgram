@@ -35,7 +35,6 @@ def build_dataset(dataset):
 def linear_layer(C, X):
     #C[X] embedding space
 
-    #using jnp.take for GPU effeciency 
     emb = C[X]
 
     return emb
