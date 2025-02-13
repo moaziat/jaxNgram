@@ -13,8 +13,8 @@ Example training progress and generated names:
             .
             .
     199000/ 200000: 2.4073
-    
-###########  Generating sample names: ###################
+
+ Generating sample names: 
 en.
 eta.
 aemoovqhgyynodpipzzp
