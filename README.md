@@ -39,7 +39,7 @@ Example training progress and generated names:
     hxopggfwmytzf.
     ```
 
-You can see that the names generated are just random letters, that's where come the Transformer, In the jaxGPT repo, I implemented GPT like model, your exercise is to train it on names-dataset.txt, you'll notice that the model is generating real names (a name you can't use LOl!) 
+You can see that the names generated are just random letters, that's where come the Transformer, In the jaxGPT repo, I implemented GPT like model, your exercise is to train it on names-dataset.txt, you'll notice that the model is generating real names (a name you can use LOl!) 
 ## Overview
 This code implements a character-level name generator using a Multi-Layer Perceptron (MLP) neural network. It learns patterns from a dataset of names and can generate new, similar-sounding names.
 
